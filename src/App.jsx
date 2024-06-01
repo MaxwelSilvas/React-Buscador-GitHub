@@ -2,27 +2,21 @@ import { useState } from "react";
 
 import Perfil from "./components/Perfil";
 import Formulario from "./components/Formulario";
-import ReposList from "./components/RepoList";
+import ReposList from "./components/ReposList";
 
 function App() {
   const [formularioEstaVisivel, setFormularioEstaVisivel] = useState(true);
+  const [nomeUsuario, setNomeUsuario] = useState("");
   return (
     <>
-      <Perfil
-        nome="Maxwel Silva"
-        endereco="https://github.com/MaxwelSilvas.png"
-      />
-      <ReposList />
+      <input type="text" onBlur={(e) => setNomeUsuario(e.target.value)} />
 
-      {/* {formularioEstaVisivel && <Formulario />} */}
-
-      {/* <button */}
-        {/* onClick={() => setFormularioEstaVisivel(!formularioEstaVisivel)} */}
-        {/* type="button" */}
-      {/* > */}
-        {/* {" "} */}
-        {/* toggle form */}
-      {/* </button> */}
+      {nomeUsuario.length > 4 && (
+        <>
+          <Perfil nomeUsuario={nomeUsuario} />
+          <ReposList nomeUsuario={nomeUsuario} />
+        </>
+      )}
     </>
   );
 }
